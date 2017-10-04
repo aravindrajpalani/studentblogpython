@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 from rest_framework.urlpatterns import format_suffix_patterns
-from .views import CreateAccountView,CreateView,DetailsView,CreateLikeView,DetailsLikeView,GetLikes
+from .views import CreateAccountView,CreateView,DetailsView,CreateLikeView,DetailsLikeView,GetLikes,CreateUserFollowingView
 from .models import Account
 from .serializers import AccountSerializer
 
@@ -14,6 +14,7 @@ urlpatterns = {
    url(r'^blogposts', DetailsView.as_view(), name="details"),
    url(r'^like/$', CreateLikeView.as_view(), name="create"),
    url(r'^like/(?P<postid>.+)/$', GetLikes.as_view(), name="details"),
+   url(r'^follow/(?P<userid>.+)/$', CreateUserFollowingView.as_view(), name="follow"),
   
  
 

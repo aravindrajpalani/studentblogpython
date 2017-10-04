@@ -9,8 +9,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 import facebook
 from rest_framework import generics
-from .serializers import BlogPostSerializer,LikeSerializer
-from .models import BlogPost,Like
+from .serializers import BlogPostSerializer,LikeSerializer,UserFollowingSerializer
+from .models import BlogPost,Like,UserFollowing
 from .permissions import IsOwner
 from rest_framework import permissions
 from rest_framework.authtoken.models import Token
@@ -81,6 +81,26 @@ class CreateLikeView(generics.ListCreateAPIView):
         #   a.likescount=a.likescount-1
         # a.save()
         
+class CreateUserFollowingView(generics.ListCreateAPIView):
+    """This class defines the create behavior of our rest api."""
+    queryset = UserFollowing.objects.all()
+    serializer_class = UserFollowingSerializer
+    permission_classes = (permissions.IsAuthenticated,IsOwner)
+
+    def post(self, request, *args, **kwargs):
+       
+        data = self.request.data
+        serializer = self.get_serializer(data=request.data)
+        ids=self.kwargs['userid']
+        print ("="+ids)  
+        # instance =serializer.save(displayname=profile['name'],fbid=profile['id'],accesstoken="")
+        test = {"token":""}
+        return Response(test, status=200)
+
+
+
+
+
 
 class DetailsView(APIView):
     """This class handles the http GET, PUT and DELETE requests."""

@@ -47,7 +47,10 @@ class Account(AbstractBaseUser):
     def __unicode__(self):
         return self.email
 
-
+class UserFollowing(models.Model):
+    user = models.ForeignKey(get_user_model(), related_name='following')
+    following = models.ForeignKey(get_user_model(), related_name='followed_by')
+    
 
 
 

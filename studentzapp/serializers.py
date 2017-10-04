@@ -2,7 +2,7 @@ from django.contrib.auth import update_session_auth_hash
 
 from rest_framework import serializers
 
-from studentzapp.models import Account
+from studentzapp.models import Account,UserFollowing
 from rest_framework import serializers
 from .models import BlogPost,Like
 
@@ -26,6 +26,13 @@ class LikeSerializer(serializers.ModelSerializer):
         fields = ('postid','post','user', 'ownername', 'ownerfbid', 'isliked')
 
 
+class UserFollowingSerializer(serializers.ModelSerializer):
+    """Serializer to map the Model instance into JSON format."""
+   
+    class Meta:
+        """Meta class to map serializer's fields with the model fields."""
+        model = UserFollowing
+        fields = ('user','following')
 
 class AccountSerializer(serializers.ModelSerializer):
   
